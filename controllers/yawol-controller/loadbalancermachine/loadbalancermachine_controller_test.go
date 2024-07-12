@@ -194,7 +194,8 @@ var _ = Describe("load balancer machine", Serial, Ordered, func() {
 	When("openstack is not working", func() {
 		BeforeEach(func() {
 			client.ServerClientObj = &testing.CallbackServerClient{
-				CreateFunc: func(ctx context.Context, opts servers.CreateOptsBuilder, hintOpts servers.SchedulerHintOptsBuilder) (*servers.Server, error) {
+				CreateFunc: func(ctx context.Context, opts servers.CreateOptsBuilder, hintOpts servers.SchedulerHintOptsBuilder,
+				) (*servers.Server, error) {
 					return &servers.Server{}, gophercloud.ErrUnexpectedResponseCode{
 						BaseError:      gophercloud.BaseError{},
 						URL:            "",

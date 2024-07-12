@@ -46,7 +46,8 @@ func (r *OSServerClient) List(ctx context.Context, opts servers.ListOptsBuilder)
 }
 
 // Invokes servers.Create() in gophercloud's servers package. Uses the computeV2 client provided in Configure().
-func (r *OSServerClient) Create(ctx context.Context, opts servers.CreateOptsBuilder, hintOpts servers.SchedulerHintOptsBuilder) (*servers.Server, error) {
+func (r *OSServerClient) Create(ctx context.Context, opts servers.CreateOptsBuilder, hintOpts servers.SchedulerHintOptsBuilder,
+) (*servers.Server, error) {
 	increasePromCounter(r.promCounter, MetricAPINova, MetricObjectServer, MetricOperationCreate)
 	tctx, cancel := context.WithTimeout(ctx, r.timeout)
 	defer cancel()

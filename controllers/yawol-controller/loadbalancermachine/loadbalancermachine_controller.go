@@ -1024,7 +1024,8 @@ func (r *LoadBalancerMachineReconciler) waitForServerStatus(
 	target []string,
 	secs int,
 ) error {
-	timeoutContext, _ := context.WithTimeout(ctx, time.Duration(secs)*time.Second)
+	timeoutContext, cancel := context.WithTimeout(ctx, time.Duration(secs)*time.Second)
+	defer cancel()
 
 	return gophercloud.WaitFor(timeoutContext, func(context.Context) (bool, error) {
 		current, err := openstackhelper.GetServerByID(ctx, serverClient, id)
